@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import "dotenv/config";
 
-import express from "express";
+import express, { NextFunction } from "express";
 import cors from "cors";
 
 import "./database";
@@ -11,11 +11,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-function logRequests(req, res, next) {
+function logRequests(req: Request, res: Response, _next: NextFunction) {
   const { method, url } = req;
   const logLabel = `[${method.toUpperCase()}] ${url}`;
   console.time(logLabel);
-  next();
+  _next();
   console.timeEnd(logLabel);
 }
 
