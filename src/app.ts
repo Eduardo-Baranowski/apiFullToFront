@@ -11,15 +11,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-function logRequests(req: Request, res: Response, _next: NextFunction) {
+function logRequests(req: Request, res: Response, next: NextFunction) {
   const { method, url } = req;
   const logLabel = `[${method.toUpperCase()}] ${url}`;
   console.time(logLabel);
-  _next();
+  next();
   console.timeEnd(logLabel);
 }
 
-app.use(logRequests);
+//app.use(logRequests);
 
 app.use(routes);
 
